@@ -1,0 +1,11 @@
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin:latest
+  imagePullPolicy: IfNotPresent
+  replicaCount: 1
+  service:
+    type: ClusterIP
+    port: 80
+  env:
+    PMA_HOST: mysql
+    PMA_USER: root
+    PMA_PASSWORD: root_password

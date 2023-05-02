@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "wordpress.fullname" . }}-wordpress
+  labels:
+    app: {{ include "wordpress.fullname" . }}
+spec:
+  type: {{ .Values.wordpress.service.type }}
+  ports:
+    - port: {{ .Values.wordpress.service.port }}
+      targetPort: 80
+      protocol: TCP
+  selector:
+    app: {{ include "wordpress.fullname" . }}
+    component: wordpress
