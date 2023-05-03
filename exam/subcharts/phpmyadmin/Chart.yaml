@@ -1,5 +1,0 @@
-apiVersion: v2
-name: fbozzardini-phpmyadmin
-description: A Helm chart for deploying phpMyAdmin.
-version: 1.0.0
-appVersion: latest

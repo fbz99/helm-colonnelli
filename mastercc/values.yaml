@@ -1,0 +1,41 @@
+# Global variables
+global:
+  imagePullSecrets: []
+
+# MySQL variables
+mysql:
+  image: mysql:5.7
+  containerName: mysql
+  rootPassword: example
+  database: wordpress
+  replicaCount: 1
+  containerPort: 3306
+  pvc:
+    claimName: mysql-pvc
+    accessMode: ReadWriteOnce
+    storage: 1Gi
+    storageClassName: standard
+
+# phpMyAdmin variables
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin:5
+  containerName: phpmyadmin
+  replicaCount: 1
+  containerPort: 80
+  pvc:
+    claimName: phpmyadmin-pvc
+    accessMode: ReadWriteOnce
+    storage: 1Gi
+    storageClassName: standard
+
+# WordPress variables
+wordpress:
+  image: wordpress:5.7.2-php7.4-apache
+  containerName: wordpress
+  replicaCount: 1
+  containerPort: 80
+  pvc:
+    claimName: wordpress-pvc
+    accessMode: ReadWriteOnce
+    storage: 1Gi
+    storageClassName: standard

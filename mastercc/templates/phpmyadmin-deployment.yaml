@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-phpmyadmin
+  labels:
+    app: phpmyadmin
+spec:
+  replicas: {{ .Values.phpmyadmin.replicaCount }}
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+        - name: {{ .Values.phpmyadmin.containerName }}
+          image: {{ .Values.phpmyadmin.image }}
+          ports:
+            - containerPort: {{ .Values.phpmyadmin.containerPort }}
+          env:
+            - name: PMA_HOST
+              value: {{ .Release.Name }}-mysql
+            - name: PMA_USER
+              value: root
+            - name: PMA_PASSWORD
+              value: password
+          volumeMounts:
+            - name: {{ .Release.Name }}-phpmyadmin-pvc
+              mountPath: /var/www/html
+      volumes:
+      - name: {{ .Release.Name }}-phpmyadmin-pvc
+        hostPath:
+          path: /var/www/html
